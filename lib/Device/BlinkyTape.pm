@@ -173,8 +173,9 @@ Perl communication to Arduino over serial USB http://www.windmeadow.com/node/38
 
 Oskari Okko Ojala E<lt>okko@cpan.orgE<gt>
 
-Based on https://github.com/blinkiverse/BlinkyTape/blob/db5311ac7498bae624be4b1b7deaadc2a291341c/examples/Blinkyboard.py by 
-Max Henstell (mhenstell) and Marty McGuire (martymcguire).
+Based on exampls/Blinkyboard.py in Blinkiverse's BlinkyTape repository at
+https://github.com/blinkiverse/BlinkyTape/ 
+by Max Henstell (mhenstell) and Marty McGuire (martymcguire).
 
 =cut
 

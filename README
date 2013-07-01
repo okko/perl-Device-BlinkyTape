@@ -63,10 +63,9 @@ REFERENCE READING
 AUTHOR
     Oskari Okko Ojala <okko@cpan.org>
 
-    Based on
-    https://github.com/blinkiverse/BlinkyTape/blob/db5311ac7498bae624be4b1b7
-    deaadc2a291341c/examples/Blinkyboard.py by Max Henstell (mhenstell) and
-    Marty McGuire (martymcguire).
+    Based on exampls/Blinkyboard.py in Blinkiverse's BlinkyTape repository
+    at https://github.com/blinkiverse/BlinkyTape/ by Max Henstell
+    (mhenstell) and Marty McGuire (martymcguire).
 
 COPYRIGHT AND LICENSE
     Copyright (C) Oskari Okko Ojala 2013
