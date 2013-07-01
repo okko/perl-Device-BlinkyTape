@@ -5,6 +5,19 @@ use utf8;
 
 extends 'Device::BlinkyTape';
 
+=head1 NAME
+
+Device::BlinkyTape:WS2811 - Control a WS2811-based BlinkyTape
+
+=head1 SYNOPSIS
+
+    use Device::BlinkyTape::WS2811;
+    my $bb = Device::BlinkyTape::WS2811->new(dev => '/dev/tty.usbmodem');
+
+See Device::BlinkyTape for documentation.
+
+=cut
+
 sub send_pixel {
     my $self = shift;
     my ($r, $g, $b) = (shift, shift, shift);
