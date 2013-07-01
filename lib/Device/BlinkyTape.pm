@@ -1,6 +1,5 @@
 package Device::BlinkyTape;
 use strict;
-# ABSTRACT: Control BlinkyTape - a led strip
 BEGIN {
     $Device::BlinkyTape::AUTHORITY = 'cpan:okko';
 }
@@ -13,6 +12,34 @@ use Device::BlinkyTape::SimulationPort;
 use Moose::Util::TypeConstraints;
 use utf8;
 
+=encoding utf-8
+=cut
+
+# ABSTRACT: Control a BlinkyTape led strip
+
+=head1 NAME
+
+Device::BlinkyTape - Control a BlinkyTape led strip
+
+=head1 SYNOPSIS
+
+    use Device::BlinkyTape::WS2811; # BlinkyTape uses WS2811
+    my $bb = Device::BlinkyTape::WS2811->new(dev => '/dev/tty.usbmodem');
+    # Set all led pixels on full white
+    $bb->all_on();
+    # Set all led pixels off
+    $bb->all_off();
+
+    # Send a white pixel (RGB 255/255/255).
+    # Pixels are sent one by one from left to right.
+    $bb->send_pixel(255,255,255);
+    $bb->send_pixel(5,5,5);
+    # shows all the sent pixels and resets send_pixel to the first pixel.
+    $bb->show(); # shows the sent pixel row
+
+=cut
+
+# These Moose subtypes are defined for isa validation.
 subtype 'GammaInt',
     as 'Int',
     where { $_ >= 0 and $_ <= 255 },
@@ -27,11 +54,46 @@ subtype 'SimulationPort',
     as 'Device::BlinkyTape::SimulationPort'
 ;
 
+=head2 dev
+
+The device where your usb ledstrip is at. Defaults to /dev/tty.usbmodem.
+
+=cut
+
 has 'dev' => (is => 'rw', isa => 'Str', default => '/dev/tty.usbmodem');
+
+=head2 port
+
+Instead of giving the device you can create the instance of this module by directly
+giving it a Device:SerialPort object. By default the Device::SerialPort object
+is created from the device given in the 'dev' parameter.
+
+=cut
+
 has 'port' => (is => 'rw', isa => 'DeviceSerialPort | SimulationPort');
+
+=head2 gamma
+
+Specify the gamma correction. Defaults to [1,1,1]
+
+=cut
+
 has 'gamma' => (is => 'rw', isa => 'ArrayRef[GammaInt]', default => sub { [1,1,1] });
 
+=head2 led_count
+
+Specify the led count, counting from 1. The default is 60.
+
+=cut
+
 has 'led_count' => (is => 'rw', isa => 'Int', default => 60);
+
+=head2 simulate
+
+Specifies if the module should simulate a BlinkyTape onscreen instead of using one in the usb port.
+Defaults to 0 (false). If this is true then the port and dev parameters have no effect.
+
+=cut
 
 has 'simulate' => (is => 'rw', isa => 'Bool', default => 0);
 
@@ -73,23 +135,39 @@ sub all_off {
 
 1;
 
-=head1 Usage
+=head2 send_pixel(r,g,b)
 
-use Device::BlinkyTape::WS2811; # BlinkyTape uses WS2811
-my $bb = Device::BlinkyTape::WS2811->new(dev => '/dev/tty.usbmodem');
-$bb->all_on();
-$bb->all_off();
-$bb->send_pixel(255,255,255);
-$bb->send_pixel(5,5,5);
-$bb->show(); # shows the sent pixel row
+Send the RGB value for the next pixel. Values 0-254 are sent as is, value 255 is converted to 254.
 
-=head1 Usage on OS X without a BlinkyTape
+=cut
 
-Install X11 server from http://xquartz.macosforge.org/landing/
+=head2 show
 
-=head1 Reference reading
- * Communicating with the Arduino in Perl http://playground.arduino.cc/interfacing/PERL
- * Perl communication to Arduino over serial USB http://www.windmeadow.com/node/38
+Shows the sent pixels and resets the send_pixel to the first led pixel of the strip. This is done
+by sending a single 255 value byte to the led strip.
+
+=cut
+
+=head1 ABOUT BLINKYTAPE
+
+Blinkytape is a controllable led strip available at http://blinkiverse.com/blinkytape/
+
+=cut
+
+=head1 USING THE MODULE ON OS X WITHOUT OWNING A BLINKYTAPE
+
+This module comes with a BlinkyTape simulator. Install X11 server to use the simulator:
+    http://xquartz.macosforge.org/landing/
+
+=cut
+
+=head1 REFERENCE READING
+
+Communicating with the Arduino in Perl http://playground.arduino.cc/interfacing/PERL
+
+Perl communication to Arduino over serial USB http://www.windmeadow.com/node/38
+
+=cut
 
 =head1 AUTHOR
 
@@ -97,6 +175,8 @@ Oskari Okko Ojala E<lt>okko@cpan.orgE<gt>
 
 Based on https://github.com/blinkiverse/BlinkyTape/blob/db5311ac7498bae624be4b1b7deaadc2a291341c/examples/Blinkyboard.py by 
 Max Henstell (mhenstell) and Marty McGuire (martymcguire).
+
+=cut
 
 =head1 COPYRIGHT AND LICENSE
 
