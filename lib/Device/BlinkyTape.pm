@@ -1,5 +1,6 @@
 package Device::BlinkyTape;
 use strict;
+# ABSTRACT: Control BlinkyTape - a led strip
 BEGIN {
     $Device::BlinkyTape::AUTHORITY = 'cpan:okko';
 }
