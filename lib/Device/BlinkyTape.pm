@@ -34,8 +34,8 @@ Device::BlinkyTape - Control a BlinkyTape led strip
     # Pixels are sent one by one from left to right.
     $bb->send_pixel(255,255,255);
     $bb->send_pixel(5,5,5);
-    # shows all the sent pixels and resets send_pixel to the first pixel.
-    $bb->show(); # shows the sent pixel row
+    # Show all sent pixels and reset send_pixel to the first pixel.
+    $bb->show();
 
 =cut
 
