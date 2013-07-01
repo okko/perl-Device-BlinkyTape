@@ -5,12 +5,12 @@ use utf8;
 
 extends 'Device::BlinkyTape';
 
-sub sendPixel {
+sub send_pixel {
     my $self = shift;
-    my ($r, $g, $b) = shift, shift, shift;
-    $r = 254 if ($r = 255); # I have no idea what I'm doing but Blinkyboard.py does this
-    $g = 254 if ($g = 255);
-    $b = 254 if ($b = 255);
+    my ($r, $g, $b) = (shift, shift, shift);
+    $r = 254 if ($r == 255); # I have no idea what I'm doing but Blinkyboard.py does this
+    $g = 254 if ($g == 255);
+    $b = 254 if ($b == 255);
     $self->port->write(chr($r).chr($g).chr($b));
 }
 
@@ -28,3 +28,17 @@ sub gamma {
 }
 
 1;
+
+=head1 AUTHOR
+
+Oskari Okko Ojala E<lt>okko@cpan.orgE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) Oskari Okko Ojala 2013
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.8 or,
+at your option, any later version of Perl you may have available.
+
+=cut
