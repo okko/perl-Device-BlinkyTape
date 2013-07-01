@@ -32,7 +32,7 @@ SYNOPSIS
     Specify the led count, counting from 1. The default is 60.
 
   simulate
-    Specifies if the module should simulate a BlinkyTape onscreen instead of
+    Specify if the module should simulate a BlinkyTape onscreen instead of
     using one in the usb port. Defaults to 0 (false). If this is true then
     the port and dev parameters have no effect.
 

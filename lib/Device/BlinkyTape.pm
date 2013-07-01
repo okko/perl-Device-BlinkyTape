@@ -90,7 +90,7 @@ has 'led_count' => (is => 'rw', isa => 'Int', default => 60);
 
 =head2 simulate
 
-Specifies if the module should simulate a BlinkyTape onscreen instead of using one in the usb port.
+Specify if the module should simulate a BlinkyTape onscreen instead of using one in the usb port.
 Defaults to 0 (false). If this is true then the port and dev parameters have no effect.
 
 =cut
