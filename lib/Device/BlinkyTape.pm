@@ -90,17 +90,19 @@ Install X11 server from http://xquartz.macosforge.org/landing/
  * Communicating with the Arduino in Perl http://playground.arduino.cc/interfacing/PERL
  * Perl communication to Arduino over serial USB http://www.windmeadow.com/node/38
 
-=head1 LICENCE
+=head1 AUTHOR
 
-TODO
-
-=head1 Copyright
-
-TODO
-
-=head1 AUTHORS
+Oskari Okko Ojala E<lt>okko@cpan.orgE<gt>
 
 Based on https://github.com/blinkiverse/BlinkyTape/blob/db5311ac7498bae624be4b1b7deaadc2a291341c/examples/Blinkyboard.py by 
 Max Henstell (mhenstell) and Marty McGuire (martymcguire).
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) Oskari Okko Ojala 2013
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.8 or,
+at your option, any later version of Perl you may have available.
 
 =cut
