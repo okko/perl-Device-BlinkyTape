@@ -173,6 +173,14 @@ This module comes with a BlinkyTape simulator. Install X11 server to use the sim
 
 =cut
 
+=head1 BUGS
+
+The device is not yet available so the module has been implemented by inspecting partly
+undocumented and unfinished code in other languages. Feel free to file any bug reports
+in Github, patches welcome.
+
+=cut
+
 =head1 REFERENCE READING
 
 Communicating with the Arduino in Perl http://playground.arduino.cc/interfacing/PERL
