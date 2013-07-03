@@ -9,6 +9,8 @@ use utf8;
 
 extends 'Device::BlinkyTape';
 
+=for Pod::Coverage send_pixel show gamma
+
 =head1 NAME
 
 Device::BlinkyTape:WS2811 - Control a WS2811-based BlinkyTape
