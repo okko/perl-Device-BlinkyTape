@@ -1,4 +1,9 @@
 package Device::BlinkyTape::SimulationPort;
+use strict;
+BEGIN {
+    # AUTHORITY
+    # VERSION
+}
 use Moose;
 use Tk;
 

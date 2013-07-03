@@ -1,10 +1,8 @@
 package Device::BlinkyTape;
 use strict;
 BEGIN {
-    $Device::BlinkyTape::AUTHORITY = 'cpan:okko';
-}
-BEGIN {
-    $Device::BlinkyTape::VERSION = '0.001';
+    # AUTHORITY
+    # VERSION
 }
 use Moose;
 use Device::SerialPort;

@@ -1,5 +1,9 @@
 package Device::BlinkyTape::WS2811;
 use strict;
+BEGIN {
+    # AUTHORITY
+    # VERSION
+}
 use Moose;
 use utf8;
 
