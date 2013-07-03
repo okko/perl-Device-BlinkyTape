@@ -95,6 +95,10 @@ Defaults to 0 (false). If this is true then the port and dev parameters have no 
 
 has 'simulate' => (is => 'rw', isa => 'Bool', default => 0);
 
+=begin Pod::Coverage
+  BUILD
+=cut
+
 sub BUILD {
     my $self = shift;
     # Initialize $self->port from $self->dev if one was not given in new
@@ -115,6 +119,12 @@ sub BUILD {
     # $self->lookclear; # empty buffers
 }
 
+=head2 all_on
+
+Turns all leds on.
+
+=cut
+
 sub all_on {
     my $self = shift;
     for (my $a=0; $a<=$self->led_count-1; $a++) {
@@ -122,6 +132,12 @@ sub all_on {
     }
     $self->show();
 }
+
+=head2 all_off
+
+Turns all leds off.
+
+=cut
 
 sub all_off {
     my $self = shift;
