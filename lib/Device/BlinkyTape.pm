@@ -15,6 +15,8 @@ use utf8;
 
 # ABSTRACT: Control a BlinkyTape led strip
 
+=for Pod::Coverage BUILD
+
 =head1 NAME
 
 Device::BlinkyTape - Control a BlinkyTape led strip
@@ -94,10 +96,6 @@ Defaults to 0 (false). If this is true then the port and dev parameters have no 
 =cut
 
 has 'simulate' => (is => 'rw', isa => 'Bool', default => 0);
-
-=begin Pod::Coverage
-  BUILD
-=cut
 
 sub BUILD {
     my $self = shift;
