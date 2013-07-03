@@ -19,6 +19,15 @@ has 'drawpixelpos' => (is => 'rw');
 has 'pixels' => (is => 'rw');
 has 'led_count' => (is => 'rw');
 
+=for Pod::Coverage BUILD
+
+=head1 Usage
+
+This module replaces the Device::SerialPort device with a BlinkyTape simulator.
+You can use it to develop for the BlinkyTape before actually getting the device.
+
+=cut
+
 sub BUILD {
     my $self = shift;
     my $pixelsize = 10;
@@ -42,6 +51,12 @@ sub BUILD {
     $self->drawpixelpos(0);
 }
 
+=head2 write
+
+Write bytes to the simulated Port. These are interpreted as BlinkyTape colours and displayed on a Tk window.
+
+=cut
+
 sub write {
     my $self = shift;
     my $color = shift;
@@ -61,11 +76,6 @@ sub write {
 }
 
 1;
-
-=head1 Usage
-
-This module replaces the Device::SerialPort device with a BlinkyTape simulator.
-You can use it to develop for the BlinkyTape before actually getting the device.
 
 =head1 AUTHOR
 
