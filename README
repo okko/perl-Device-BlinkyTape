@@ -36,6 +36,11 @@ SYNOPSIS
     using one in the usb port. Defaults to 0 (false). If this is true then
     the port and dev parameters have no effect.
 
+  sleeptime
+    Sending data too fast freezes the BlinkyTape. Sleeping for 30
+    microseconds between each byte makes sure the atmega processor of the
+    BlinkyTape can keep up with the incoming data.
+
   all_on
     Turns all leds on.
 
