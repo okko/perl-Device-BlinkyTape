@@ -97,6 +97,15 @@ Defaults to 0 (false). If this is true then the port and dev parameters have no 
 
 has 'simulate' => (is => 'rw', isa => 'Bool', default => 0);
 
+=head2 sleeptime
+
+Sending data too fast freezes the BlinkyTape. Sleeping for 30 microseconds between each byte
+makes sure the atmega processor of the BlinkyTape can keep up with the incoming data.
+
+=cut
+
+has 'sleeptime' => (is => 'rw', default => 30);
+
 sub BUILD {
     my $self = shift;
     # Initialize $self->port from $self->dev if one was not given in new

@@ -6,6 +6,7 @@ BEGIN {
 }
 use Moose;
 use utf8;
+use Time::HiRes qw(usleep);
 
 extends 'Device::BlinkyTape';
 
@@ -30,12 +31,18 @@ sub send_pixel {
     $r = 254 if ($r == 255); # The 255 means end of led line and applies the colors. Drop that value by one. Blinkyboard.py does this.
     $g = 254 if ($g == 255);
     $b = 254 if ($b == 255);
-    $self->port->write(chr($r).chr($g).chr($b));
+    $self->port->write(chr($r));
+    usleep($self->sleeptime);
+    $self->port->write(chr($g));
+    usleep($self->sleeptime);
+    $self->port->write(chr($b));
+    usleep($self->sleeptime);
 }
 
 sub show {
     my $self = shift;
     $self->port->write(chr(255));
+    usleep($self->sleeptime);
 }
 
 sub gamma {
