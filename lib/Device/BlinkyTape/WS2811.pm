@@ -41,6 +41,10 @@ sub send_pixel {
 
 sub show {
     my $self = shift;
+    $self->port->write(chr(0));
+    usleep($self->sleeptime);
+    $self->port->write(chr(0));
+    usleep($self->sleeptime);
     $self->port->write(chr(255));
     usleep($self->sleeptime);
 }
