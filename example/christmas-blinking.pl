@@ -4,17 +4,25 @@ use lib '../lib';
 use Device::BlinkyTape::WS2811; # BlinkyTape uses WS2811
 use Time::HiRes qw/ usleep /;
 
-print "Usage: $0 [amount_of_blinking] [blinking_speed_min] [blinking_speed_max]\n";
-print "   Default is $0 30 1 30\n";
-print "   For faster blinking:  $0  30 30 30\n";
-print "   For lots of blinking  $0   1 1  30\n";
-print "\n";
+my $dev = shift @ARGV;
+
+if (!$dev) {
+    print "\n";
+    print "Usage: $0 [device] [amount_of_blinking] [blinking_speed_min] [blinking_speed_max]\n";
+    print "   [device] is the file to BlinkyTape, for example /dev/tty.usbmodem1411\n";
+    print "\n";
+    print "   Default is            $0 [device] 30  1 30\n";
+    print "   For faster blinking:  $0 [device] 30 30 30\n";
+    print "   For lots of blinking  $0 [device]  1  1 30\n";
+    print "\n";
+    exit 255;
+}
 
 my $amount_of_blinking = shift @ARGV || 30;
 my $brightness_step_min = shift @ARGV || 1;
 my $brightness_step_max = shift @ARGV || 30;
 
-my $bb = Device::BlinkyTape::WS2811->new(dev => '/dev/tty.usbmodem1411');
+my $bb = Device::BlinkyTape::WS2811->new(dev => $dev);
 
 my @led; # 0..59
 for (my $a=0; $a<=59; $a++) {
