@@ -5,7 +5,15 @@ BEGIN {
     # VERSION
 }
 use Moose;
-use Device::SerialPort;
+
+if ($^O eq 'MSWin32') {
+   require 'Win32::SerialPort';
+   import Win32::SerialPort;
+} else {
+   require 'Device::SerialPort';
+   import Device::SerialPort;
+}
+
 use Device::BlinkyTape::SimulationPort;
 use Moose::Util::TypeConstraints;
 use utf8;
@@ -33,9 +41,22 @@ Device::BlinkyTape - Control a BlinkyTape led strip
     # Send a white pixel (RGB 255/255/255).
     # Pixels are sent one by one from left to right.
     $bb->send_pixel(255,255,255);
+    # Send an RGB 5/5/5 pixel
     $bb->send_pixel(5,5,5);
     # Show all sent pixels and reset send_pixel to the first pixel.
     $bb->show();
+
+=cut
+
+=head1 SYNOPSIS, WINDOWS
+
+    use Device::BlinkyTape::WS2811;
+    use Win32::SerialPort;
+    my $PortName = 'COM2';
+    my $bb = Device::BlinkyTape::WS2811->new(Win32SerialPort => new Win32::SerialPort ($PortName));
+
+    $bb->all_on();
+    #...
 
 =cut
 
@@ -48,6 +69,10 @@ subtype 'GammaInt',
 
 subtype 'DeviceSerialPort',
     as 'Device::SerialPort'
+;
+
+subtype 'Win32SerialPort',
+    as 'Win32::SerialPort'
 ;
 
 subtype 'SimulationPort',
@@ -65,12 +90,12 @@ has 'dev' => (is => 'rw', isa => 'Str', default => '/dev/tty.usbmodem');
 =head2 port
 
 Instead of giving the device you can create the instance of this module by directly
-giving it a Device:SerialPort object. By default the Device::SerialPort object
-is created from the device given in the 'dev' parameter.
+giving it a Device:SerialPort or a Win32::SerialPort object. By default the
+Device::SerialPort object is created from the device given in the 'dev' parameter.
 
 =cut
 
-has 'port' => (is => 'rw', isa => 'DeviceSerialPort | SimulationPort');
+has 'port' => (is => 'rw', isa => 'DeviceSerialPort | SimulationPort | Win32SerialPort');
 
 =head2 gamma
 
