@@ -1,4 +1,9 @@
-requires 'Device::SerialPort';
+if ($^O eq 'MSWin32') {
+   requires 'Win32::SerialPort';
+} else {
+   requires 'Device::SerialPort';
+}
+
 requires 'ExtUtils::MakeMaker';
 requires 'Moose';
 requires 'Moose::Util::TypeConstraints';
