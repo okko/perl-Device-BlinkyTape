@@ -3,18 +3,18 @@ use strict;
 BEGIN {
     # AUTHORITY
     # VERSION
+    if ($^O eq 'MSWin32') {
+      eval "use Win32::SerialPort";
+      die "$@" if $@;
+    } else {
+      eval "use Device::SerialPort";
+      die "$@" if $@;
+    }
+
 }
 use Moose;
 
-if ($^O eq 'MSWin32') {
-   require 'Win32::SerialPort';
-   import Win32::SerialPort;
-} else {
-   require 'Device::SerialPort';
-   import Device::SerialPort;
-}
 
-use Device::BlinkyTape::SimulationPort;
 use Moose::Util::TypeConstraints;
 use utf8;
 
@@ -135,11 +135,12 @@ sub BUILD {
     my $self = shift;
     # Initialize $self->port from $self->dev if one was not given in new
     if ($self->simulate) {
-        $self->port(Device::BlinkyTape::SimulationPort->new(led_count => $self->led_count));
         warn 'simulation on.';
+        use Device::BlinkyTape::SimulationPort;
+        $self->port(Device::BlinkyTape::SimulationPort->new(led_count => $self->led_count));
     }
     $self->port(Device::SerialPort->new($self->dev)) if (!$self->port);
-    
+
     if ($self->port) {
         # Set default communication settings
         $self->port->baudrate(19200);
@@ -228,7 +229,7 @@ Perl communication to Arduino over serial USB http://www.windmeadow.com/node/38
 Oskari Okko Ojala E<lt>okko@cpan.orgE<gt>
 
 Based on exampls/Blinkyboard.py in Blinkiverse's BlinkyTape repository at
-https://github.com/blinkiverse/BlinkyTape/ 
+https://github.com/blinkiverse/BlinkyTape/
 by Max Henstell (mhenstell) and Marty McGuire (martymcguire).
 
 =cut

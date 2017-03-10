@@ -3,9 +3,10 @@ use strict;
 BEGIN {
     # AUTHORITY
     # VERSION
+
+    eval "use Tk";
 }
 use Moose;
-use Tk;
 
 has 'baudrate' => (is => 'rw');
 has 'databits' => (is => 'rw');
