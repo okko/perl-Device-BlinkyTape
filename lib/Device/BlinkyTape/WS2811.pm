@@ -28,6 +28,7 @@ See Device::BlinkyTape for documentation.
 sub send_pixel {
     my $self = shift;
     my ($r, $g, $b) = (shift, shift, shift);
+	$r ||= 0; $g ||= 0; $b ||= 0;
     $r = 254 if ($r == 255); # The 255 means end of led line and applies the colors. Drop that value by one. Blinkyboard.py does this.
     $g = 254 if ($g == 255);
     $b = 254 if ($b == 255);
